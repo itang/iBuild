@@ -6,7 +6,7 @@ private def main(argv)
   puts "iBuild(I-LOVE-BUILD)-v#{IBuild::VERSION}"
 
   if project = IBuild.detect()
-    cmd = argv[0]? || "unknown"
+    cmd = argv[0]?
     IBuild.run(project, "info") unless cmd == "info"
     IBuild.run(project, cmd)
   else

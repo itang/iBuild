@@ -1,12 +1,12 @@
 ##
-# Elixir Phoenix Project.
+# Elixir Mix Project.
 ##
 module IBuild::Projects
-  class Phoenix < Project
+  class Mix < Project
     BUILD_FILE = "mix.exs"
 
     def self.detect(dir)
-      File.exists?(dir + "/#{BUILD_FILE}") && File.exists?(dir + "/package.json")
+      File.exists?(dir + "/#{BUILD_FILE}")
     end
 
     def info: ProjectInfo
@@ -33,7 +33,7 @@ module IBuild::Projects
     end
 
     def run()
-      fork_run_browser("mix phoenix.server", "http://localhost:4000")
+      sh "mix run"
     end
 
     def test()
@@ -49,7 +49,7 @@ module IBuild::Projects
     end
 
     def to_s(io)
-      io << "Elixir Phoenix"
+      io << "Elixir Mix"
     end
   end
 end

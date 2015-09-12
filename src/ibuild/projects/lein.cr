@@ -1,12 +1,12 @@
 ##
-# Clojure Ring Project.
+# Clojure Lein Project.
 ##
 module IBuild::Projects
-  class Ring < Project
+  class Lein < Project
     BUILD_FILE = "project.clj"
     def self.detect(dir)
       pclj = dir + "/#{BUILD_FILE}"
-      File.exists?(pclj) && File.read(pclj).includes?("lein-ring")
+      File.exists?(pclj)
     end
 
     def info(): ProjectInfo
@@ -21,7 +21,7 @@ module IBuild::Projects
 
     # @Override
     def run()
-      sh "lein ring server"
+      sh "lein run"
     end
 
     # @Override
@@ -45,7 +45,7 @@ module IBuild::Projects
 
     # @Override
     def to_s(io)
-      io << "Clojure Ring"
+      io << "Clojure Lein"
     end
   end
 end
