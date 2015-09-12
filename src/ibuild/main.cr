@@ -2,16 +2,24 @@ require "colorize"
 require "./version"
 require "./cmd"
 
-private def main(argv)
-  puts "iBuild(I-LOVE-BUILD)-v#{IBuild::VERSION}"
+private def usage()
+  puts "iBuild(I-LOVE-BUILD)-v#{IBuild::VERSION}".colorize(:blue)
+  puts "Usage: ibuild task
+* task: --help,-h | info | compile | run | test | repl | format | clean".colorize(:yellow)
+end
 
-  if project = IBuild.detect()
-    cmd = argv[0]?
-    IBuild.run(project, "info") unless cmd == "info"
-    IBuild.run(project, cmd)
+private def main(argv)
+  cmd = argv[0]?
+  case cmd
+  when "--help", "-h"
+      usage()
   else
-    puts "INFO: in #{Dir.working_directory}".colorize(:blue)
-    puts "WARN: Unknown Project".colorize(:red)
+    if project = IBuild.detect()
+      IBuild.run(project, cmd)
+    else
+      puts "INFO: in #{Dir.working_directory}".colorize(:blue)
+      puts "WARN: Unknown Project".colorize(:red)
+    end
   end
 end
 
