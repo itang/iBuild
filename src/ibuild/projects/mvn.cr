@@ -33,6 +33,18 @@ module IBuild::Projects
       sh "mvn clean"
     end
 
+    def deps_tree()
+      sh "mvn dependency:tree"
+    end
+
+    def deps_updates()
+      sh "mvn versions:display-dependency-updates"
+    end
+
+    def deps_update()
+      sh "mvn compile"
+    end
+
     # @Override
     def to_s(io)
       io << "Maven"

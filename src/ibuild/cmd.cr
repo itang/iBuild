@@ -30,6 +30,9 @@ module IBuild
     when "format", "fmt"   then project.format()
     when "compile"         then project.compile()
     when "clean"           then project.clean()
+    when "deps:outdated"   then project.deps_outdated()
+    when "deps:update"     then project.deps_update()
+    when "deps:tree"       then project.deps_tree()
     else
       puts "Unkown task: #{cmd}".colorize(:red)
     end

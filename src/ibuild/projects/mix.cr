@@ -48,6 +48,14 @@ module IBuild::Projects
       sh "mix clean"
     end
 
+    def deps_outdated()
+      sh "mix hex.outdated"
+    end
+
+    def deps_update()
+      sh "mix deps.get"
+    end
+
     def to_s(io)
       io << "Elixir Mix"
     end

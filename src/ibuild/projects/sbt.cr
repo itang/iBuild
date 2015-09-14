@@ -44,6 +44,18 @@ module IBuild::Projects
       sh "sbt clean"
     end
 
+    def deps_outdated()
+      sh "sbt dependencyUpdates"
+    end
+
+    def deps_tree()
+      sh "sbt dependencyUpdatesReport"
+    end
+
+    def deps_update()
+      sh "sbt compile"
+    end
+
     # @Override
     def to_s(io)
       io << "Scala SBT"

@@ -43,6 +43,18 @@ module IBuild::Projects
       sh "lein clean"
     end
 
+    def deps_tree()
+      sh "lein deps :tree"
+    end
+
+    def deps_outdated()
+      sh "lein ancient"
+    end
+
+    def deps_update()
+      sh "lein deps"
+    end
+
     # @Override
     def to_s(io)
       io << "Clojure Lein"

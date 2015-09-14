@@ -48,6 +48,18 @@ module IBuild::Projects
       puts_no_impl_info
     end
 
+    def deps_tree()
+      puts_no_impl_info
+    end
+
+    def deps_outdated()
+      puts_no_impl_info
+    end
+
+    def deps_update()
+      puts_no_impl_info
+    end
+
     protected def sh(cmd)
       puts cmd
       system cmd
