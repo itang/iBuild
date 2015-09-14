@@ -49,7 +49,7 @@ module IBuild::Projects
     end
 
     def deps_tree()
-      sh "sbt dependencyUpdatesReport"
+      sh "sbt dependencyGraph"
     end
 
     def deps_update()
