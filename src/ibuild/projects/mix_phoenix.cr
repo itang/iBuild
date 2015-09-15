@@ -10,7 +10,7 @@ module IBuild::Projects
     end
 
     def run()
-      fork_run_browser("mix phoniex.server", "http://localhost:4000")
+      fork_run_browser("mix phoenix.server", "http://localhost:4000")
     end
 
     def to_s(io)
