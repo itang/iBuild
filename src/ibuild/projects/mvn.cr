@@ -37,7 +37,7 @@ module IBuild::Projects
       sh "mvn dependency:tree"
     end
 
-    def deps_updates()
+    def deps_outdated()
       sh "mvn versions:display-dependency-updates"
     end
 
