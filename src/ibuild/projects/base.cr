@@ -66,7 +66,7 @@ module IBuild::Projects
     end
 
     protected def fork_run_browser(cmd: String, url: String)
-      pid = fork { sh cmd }
+      target_ps = fork { sh cmd }
 
       fork do
         port = URI.parse(url).port.try(&.to_u16) || 80_u16
@@ -76,7 +76,7 @@ module IBuild::Projects
         end
       end
 
-      Process.waitpid(pid)
+      target_ps.wait()
     end
 
     private def wait_until_port_open(port: UInt16, sleeps = 1, &block)
