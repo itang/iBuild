@@ -10,9 +10,8 @@ module IBuild::Projects
     def info(): ProjectInfo
       if File.exists?(BUILD_FILE)
         lines = File.read(BUILD_FILE).lines
-        name = lines.find{|x| x.starts_with?("name:")}.try{|x| x.split(":")[1].try(&.strip)}
-        version = lines.find{|x| x.starts_with?("version:")}.try{|x| x.split(":")[1].try(&.strip)}
-
+        name = yaml_value_by_key(lines, "name")
+        version = yaml_value_by_key(lines, "version")
         ProjectInfo.new(name, version)
       else
         ProjectInfo.new("Unknown project name", "Unknown project version")
@@ -62,6 +61,10 @@ module IBuild::Projects
     # @Override
     def to_s(io)
       io << "Crystal"
+    end
+
+    private def yaml_value_by_key(lines, key: String)
+      lines.find{|x| x.starts_with?("#{key}:")}.try{|x| x.split(":")[1]?.try(&.strip)}
     end
   end
 end
