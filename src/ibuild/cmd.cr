@@ -18,6 +18,8 @@ module IBuild
 
     when SpringBoot.detect(dir)  then SpringBoot.new
     when Mvn.detect(dir)         then Mvn.new
+
+    when Shards.detect(dir)      then Shards.new
     end
   end
 

@@ -1,0 +1,67 @@
+require "yaml"
+
+module IBuild::Projects
+  class Shards < Project
+    BUILD_FILE = "shard.yml"
+    def self.detect(dir)
+      File.exists?(BUILD_FILE) || File.exists?("Projectfile")
+    end
+
+    def info(): ProjectInfo
+      if File.exists?(BUILD_FILE)
+        lines = File.read(BUILD_FILE).lines
+        name = lines.find{|x| x.starts_with?("name:")}.try{|x| x.split(":")[1].try(&.strip)}
+        version = lines.find{|x| x.starts_with?("version:")}.try{|x| x.split(":")[1].try(&.strip)}
+
+        ProjectInfo.new(name, version)
+      else
+        ProjectInfo.new("Unknown project name", "Unknown project version")
+      end
+    end
+
+    def compile()
+      sh %(crystal build #{Dir["src/*.cr"].first})
+    end
+
+    # @Override
+    def run()
+      sh %(crystal run #{Dir["src/*.cr"].first})
+    end
+
+    # @Override
+    def test()
+      sh "crystal spec"
+    end
+
+    # @Override
+    def repl()
+      super
+    end
+
+    # @Override
+    def format()
+      super
+    end
+
+    def clean()
+      super
+    end
+
+    def deps_tree()
+      sh "shards check -v"
+    end
+
+    def deps_outdated()
+      sh "shards check"
+    end
+
+    def deps_update()
+      sh "shards update"
+    end
+
+    # @Override
+    def to_s(io)
+      io << "Crystal"
+    end
+  end
+end
