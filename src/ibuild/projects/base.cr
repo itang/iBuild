@@ -60,6 +60,16 @@ module IBuild::Projects
       puts_no_impl_info
     end
 
+    def git_commit_all()
+      #puts "Confirm(Y?): "
+      #ok = gets
+      #if ok.try(&.downcase) == 'y'
+        sh "git add --all"
+        sh %(git commit -m "just commit")
+        sh "git push origin master"
+      #end
+    end
+
     protected def sh(cmd)
       puts cmd
       system cmd

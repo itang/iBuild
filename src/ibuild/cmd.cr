@@ -35,6 +35,7 @@ module IBuild
     when "deps:outdated"   then project.deps_outdated()
     when "deps:update"     then project.deps_update()
     when "deps:tree"       then project.deps_tree()
+    when "git:commit:all"  then project.git_commit_all()
     else
       puts "Unkown task: #{cmd}".colorize(:red)
     end
