@@ -1,0 +1,12 @@
+name: iBuild
+version: 0.0.1
+
+#dependencies:
+#  sqlite3:
+#    github: manastech/crystal-sqlite3
+#    branch: master
+#  redis:
+#    github: stefanwille/crystal-redis
+#    branch: master
+
+# manastech/crystal_redis

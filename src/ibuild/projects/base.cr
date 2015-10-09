@@ -24,41 +24,15 @@ module IBuild::Projects
 
     abstract def info(): ProjectInfo
 
-    def compile()
-      puts_no_impl_info
+    macro define_dummy_methods(*names)
+      {% for name, index in names %}
+        def {{name.id}}
+          puts_no_impl_info
+        end
+      {% end %}
     end
 
-    def run()
-      puts_no_impl_info
-    end
-
-    def test()
-      puts_no_impl_info
-    end
-
-    def repl()
-      puts_no_impl_info
-    end
-
-    def format()
-      puts_no_impl_info
-    end
-
-    def clean()
-      puts_no_impl_info
-    end
-
-    def deps_tree()
-      puts_no_impl_info
-    end
-
-    def deps_outdated()
-      puts_no_impl_info
-    end
-
-    def deps_update()
-      puts_no_impl_info
-    end
+    define_dummy_methods compile, run, start, test, repl, format, clean, deps_tree, deps_outdated, deps_update
 
     def git_commit_all()
       #puts "Confirm(Y?): "

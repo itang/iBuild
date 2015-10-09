@@ -27,6 +27,7 @@ module IBuild
     case cmd
     when "info", nil       then puts "Project Type: '#{project}', Project Info: #{project.info}\n".colorize(:green)
     when "run"             then project.run()
+    when "start"           then project.start()
     when "test"            then project.test()
     when "repl", "console" then project.repl()
     when "format", "fmt"   then project.format()
