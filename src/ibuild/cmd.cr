@@ -20,6 +20,8 @@ module IBuild
     when Mvn.detect(dir)         then Mvn.new
 
     when Shards.detect(dir)      then Shards.new
+
+    when Cargo.detect(dir)      then Cargo.new
     end
   end
 
