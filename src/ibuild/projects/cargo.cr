@@ -44,6 +44,8 @@ module IBuild::Projects
 
     # @Override
     def format()
+      # @see https://github.com/pwoolcoc/cargo-fmt
+      # @see https://github.com/pwoolcoc/cargo-do
       sh "cargo do fmt"
     end
 
@@ -52,7 +54,8 @@ module IBuild::Projects
     end
 
     def deps_tree()
-      super
+      # @see https://github.com/killercup/cargo-edit
+      sh "cargo do list --tree"
     end
 
     def deps_outdated()
