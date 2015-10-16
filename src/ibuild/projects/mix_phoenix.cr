@@ -17,6 +17,10 @@ module IBuild::Projects
       fork_run_browser("MIX_ENV=prod PORT=4001 elixir --detached -S mix do compile, phoenix.server", "http://localhost:4001")
     end
 
+    def repl()
+      sh "iex -S mix phoenix.server"
+    end
+
     def to_s(io)
       io << "Elixir Mix Phoenix"
     end
