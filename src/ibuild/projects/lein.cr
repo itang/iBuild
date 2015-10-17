@@ -1,57 +1,58 @@
-##
+# #
 # Clojure Lein Project.
-##
+# #
 module IBuild::Projects
   class Lein < Project
     BUILD_FILE = "project.clj"
+
     def self.detect(dir)
       pclj = dir + "/#{BUILD_FILE}"
       File.exists?(pclj)
     end
 
-    def info(): ProjectInfo
+    def info : ProjectInfo
       first_line = File.read(BUILD_FILE).lines[0]
       _, name, version = first_line.split /\s+/
       ProjectInfo.new name, version[1..-2]
     end
 
-    def compile()
+    def compile
       sh "lein compile"
     end
 
     # @Override
-    def run()
+    def run
       sh "lein run"
     end
 
     # @Override
-    def test()
+    def test
       sh "lein test"
     end
 
     # @Override
-    def repl()
+    def repl
       sh "lein repl"
     end
 
     # @Override
-    def format()
+    def format
       sh "lein cljfmt fix"
     end
 
-    def clean()
+    def clean
       sh "lein clean"
     end
 
-    def deps_tree()
+    def deps_tree
       sh "lein deps :tree"
     end
 
-    def deps_outdated()
+    def deps_outdated
       sh "lein ancient"
     end
 
-    def deps_update()
+    def deps_update
       sh "lein deps"
     end
 

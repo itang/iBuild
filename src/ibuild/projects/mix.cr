@@ -1,6 +1,6 @@
-##
+# #
 # Elixir Mix Project.
-##
+# #
 module IBuild::Projects
   class Mix < Project
     BUILD_FILE = "mix.exs"
@@ -9,50 +9,50 @@ module IBuild::Projects
       File.exists?(dir + "/#{BUILD_FILE}")
     end
 
-    def info: ProjectInfo
+    def info : ProjectInfo
       f = File.read(BUILD_FILE)
       clines = f.lines
 
       name = begin
-        ak = "[app: :"
-        appline = clines.find {|x| x.includes?(ak)}
-        appline.sub(ak, "").gsub(",", "").strip if appline
-      end
+               ak = "[app: :"
+               appline = clines.find { |x| x.includes?(ak) }
+               appline.sub(ak, "").gsub(",", "").strip if appline
+             end
 
       version = begin
-        vk = %(version: ")
-        vline = clines.find {|x| x.includes?(vk)}
-        vline.sub(vk, "").gsub("\"", "").gsub(",", "").strip if vline
-      end
+                  vk = %(version: ")
+                  vline = clines.find { |x| x.includes?(vk) }
+                  vline.sub(vk, "").gsub("\"", "").gsub(",", "").strip if vline
+                end
 
       ProjectInfo.new name, version
     end
 
-    def compile()
+    def compile
       sh "mix compile"
     end
 
-    def run()
+    def run
       sh "mix run"
     end
 
-    def test()
+    def test
       sh "mix test"
     end
 
-    def repl()
+    def repl
       sh "iex -S mix"
     end
 
-    def clean()
+    def clean
       sh "mix clean"
     end
 
-    def deps_outdated()
+    def deps_outdated
       sh "mix hex.outdated"
     end
 
-    def deps_update()
+    def deps_update
       sh "mix deps.get"
     end
 

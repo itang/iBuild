@@ -3,11 +3,12 @@ require "yaml"
 module IBuild::Projects
   class Shards < Project
     BUILD_FILE = "shard.yml"
+
     def self.detect(dir)
       File.exists?(BUILD_FILE) || File.exists?("Projectfile")
     end
 
-    def info(): ProjectInfo
+    def info : ProjectInfo
       if File.exists?(BUILD_FILE)
         lines = File.read(BUILD_FILE).lines
         name = yaml_value_by_key(lines, "name")
@@ -18,43 +19,43 @@ module IBuild::Projects
       end
     end
 
-    def compile()
+    def compile
       sh %(crystal build #{Dir["src/*.cr"].first})
     end
 
     # @Override
-    def run()
+    def run
       sh %(crystal run #{Dir["src/*.cr"].first})
     end
 
     # @Override
-    def test()
+    def test
       sh "crystal spec"
     end
 
     # @Override
-    def repl()
+    def repl
       super
     end
 
     # @Override
-    def format()
+    def format
+      sh "crystal tool format"
+    end
+
+    def clean
       super
     end
 
-    def clean()
-      super
-    end
-
-    def deps_tree()
+    def deps_tree
       sh "shards check -v"
     end
 
-    def deps_outdated()
+    def deps_outdated
       sh "shards check"
     end
 
-    def deps_update()
+    def deps_update
       sh "shards update"
     end
 
@@ -63,8 +64,8 @@ module IBuild::Projects
       io << "Crystal"
     end
 
-    private def yaml_value_by_key(lines, key: String)
-      lines.find{|x| x.starts_with?("#{key}:")}.try{|x| x.split(":")[1]?.try(&.strip)}
+    private def yaml_value_by_key(lines : Array(String), key : String)
+      lines.find { |x| x.starts_with?("#{key}:") }.try { |x| x.split(":")[1]?.try(&.strip) }
     end
   end
 end

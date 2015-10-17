@@ -1,6 +1,6 @@
-##
+# #
 # Clojure Ring Project.
-##
+# #
 module IBuild::Projects
   class Ring < Lein
     def self.detect(dir)
@@ -8,7 +8,7 @@ module IBuild::Projects
     end
 
     # @Override
-    def run()
+    def run
       sh "lein ring server"
     end
 

@@ -6,9 +6,9 @@ module IBuild::Projects
   class ProjectInfo
     getter name, version
 
-    json_mapping({
-      name: {type: String, nilable: true},
-      version: {type: String, nilable: true}
+    JSON.mapping({
+      name:    {type: String, nilable: true},
+      version: {type: String, nilable: true},
     })
 
     def initialize(@name, @version)
@@ -20,9 +20,9 @@ module IBuild::Projects
   end
 
   abstract class Project
-    abstract def self.detect(dir = "."): Bool
+    abstract def self.detect(dir = ".") : Bool
 
-    abstract def info(): ProjectInfo
+    abstract def info : ProjectInfo
 
     macro define_dummy_methods(*names)
       {% for name, index in names %}
@@ -34,14 +34,14 @@ module IBuild::Projects
 
     define_dummy_methods compile, run, start, test, repl, format, clean, deps_tree, deps_outdated, deps_update
 
-    def git_commit_all()
-      #puts "Confirm(Y?): "
-      #ok = gets
-      #if ok.try(&.downcase) == 'y'
-        sh "git add --all"
-        sh %(git commit -m "just commit")
-        sh "git push origin master"
-      #end
+    def git_commit_all
+      # puts "Confirm(Y?): "
+      # ok = gets
+      # if ok.try(&.downcase) == 'y'
+      sh "git add --all"
+      sh %(git commit -m "just commit")
+      sh "git push origin master"
+      # end
     end
 
     protected def sh(cmd)
@@ -49,7 +49,7 @@ module IBuild::Projects
       system cmd
     end
 
-    protected def fork_run_browser(cmd: String, url: String)
+    protected def fork_run_browser(cmd : String, url : String)
       target_ps = fork { sh cmd }
 
       fork do
@@ -60,17 +60,17 @@ module IBuild::Projects
         end
       end
 
-      target_ps.wait()
+      target_ps.wait
     end
 
-    private def wait_until_port_open(port: UInt16, sleeps = 1, &block)
-      while (ret=`lsof -i :#{port}`).empty?
+    private def wait_until_port_open(port : UInt16, sleeps = 1, &block)
+      while (ret = `lsof -i :#{port}`).empty?
         sleep sleeps
       end
       block.call
     end
 
-    private def puts_no_impl_info()
+    private def puts_no_impl_info
       puts "Do nothing!"
     end
   end

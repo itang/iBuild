@@ -1,6 +1,6 @@
-##
+# #
 # Maven Project.
-##
+# #
 require "xml"
 
 module IBuild::Projects
@@ -12,7 +12,7 @@ module IBuild::Projects
       File.exists?(pxml)
     end
 
-    def info: ProjectInfo
+    def info : ProjectInfo
       doc = XML.parse(File.read(BUILD_FILE))
       # @IMPROVE: xpath
       root = doc.root
@@ -21,27 +21,27 @@ module IBuild::Projects
       ProjectInfo.new name_el.try(&.text), version_el.try(&.text)
     end
 
-    def compile()
+    def compile
       sh "mvn compile"
     end
 
-    def test()
+    def test
       sh "mvn test"
     end
 
-    def clean()
+    def clean
       sh "mvn clean"
     end
 
-    def deps_tree()
+    def deps_tree
       sh "mvn dependency:tree"
     end
 
-    def deps_outdated()
+    def deps_outdated
       sh "mvn versions:display-dependency-updates"
     end
 
-    def deps_update()
+    def deps_update
       sh "mvn compile"
     end
 

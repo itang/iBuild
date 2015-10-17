@@ -1,6 +1,6 @@
-##
+# #
 # Spring Boot Project.
-##
+# #
 module IBuild::Projects
   class SpringBoot < Mvn
     def self.detect(dir)
@@ -8,17 +8,17 @@ module IBuild::Projects
     end
 
     # @Override
-    def run()
+    def run
       fork_run_browser(
         %(mvn clean spring-boot:run -Drun.jvmArguments="-Xmx1g -noverify -Drun.mode=dev"),
         "http://localhost:#{port}"
       )
     end
 
-    private def port(): UInt16
+    private def port : UInt16
       f = "src/main/resources/application.properties"
       if File.exists?(f)
-        if line = File.read(f).lines.find {|x| x.starts_with?("server.port=")}
+        if line = File.read(f).lines.find { |x| x.starts_with?("server.port=") }
           return line.split("=")[1].to_u16
         end
       end
