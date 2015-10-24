@@ -25,6 +25,10 @@ module IBuild::Projects
     end
 
     def compile
+      build
+    end
+
+    def build
       sh_with_argv "cargo build"
     end
 

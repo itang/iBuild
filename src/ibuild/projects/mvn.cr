@@ -25,6 +25,10 @@ module IBuild::Projects
       sh "mvn compile"
     end
 
+    def build
+      sh "mvn package"
+    end
+
     def test
       sh "mvn test"
     end

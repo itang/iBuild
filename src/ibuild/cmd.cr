@@ -29,6 +29,7 @@ module IBuild
     when "repl", "console" then project.repl
     when "format", "fmt"   then project.format
     when "compile"         then project.compile
+    when "build"           then project.build
     when "clean"           then project.clean
     when "deps:outdated"   then project.deps_outdated
     when "deps:update"     then project.deps_update

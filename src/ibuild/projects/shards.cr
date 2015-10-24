@@ -20,6 +20,10 @@ module IBuild::Projects
     end
 
     def compile
+      build
+    end
+
+    def build
       sh_with_argv %(crystal build #{Dir["src/*.cr"].first})
     end
 

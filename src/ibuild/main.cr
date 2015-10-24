@@ -5,7 +5,7 @@ require "./cmd"
 private def usage
   puts "iBuild(I-LOVE-BUILD)-v#{IBuild::VERSION}".colorize(:blue)
   puts "Usage: ibuild task
-* task: --help,-h | info | compile | run | start | test | repl | format | clean | deps:outdated | deps:update | deps:tree | git:commit:all".colorize(:yellow)
+* task: --help,-h | info | compile | build | run | start | test | repl | format | clean | deps:outdated | deps:update | deps:tree | git:commit:all".colorize(:yellow)
 end
 
 private def main(argv)
