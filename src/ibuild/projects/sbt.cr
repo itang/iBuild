@@ -25,7 +25,7 @@ module IBuild::Projects
     def run
       case
       when File.read("project/plugins.sbt") =~ /.+sbt-revolver.+/
-        fork_run_browser(%(sbt "~re-start"), "http://localhost:7070")
+        fork_run_browser(%(sbt "~re-start"), "http://localhost:8888")
       else
         sh "sbt run"
       end

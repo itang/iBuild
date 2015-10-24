@@ -20,12 +20,12 @@ module IBuild::Projects
     end
 
     def compile
-      sh %(crystal build #{Dir["src/*.cr"].first})
+      sh_with_argv %(crystal build #{Dir["src/*.cr"].first})
     end
 
     # @Override
     def run
-      sh %(crystal run #{Dir["src/*.cr"].first})
+      sh_with_argv %(crystal run #{Dir["src/*.cr"].first})
     end
 
     # @Override

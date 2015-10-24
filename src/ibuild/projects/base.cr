@@ -44,9 +44,15 @@ module IBuild::Projects
       # end
     end
 
-    protected def sh(cmd)
-      puts cmd
-      system cmd
+    protected def sh_with_argv(cmd)
+      # 传递附加命令行参数
+      sh cmd, ARGV[1..-1].join(" ")
+    end
+
+    protected def sh(cmd, args = nil)
+      cmd1 = (args ? cmd + " " + args : cmd)
+      puts cmd1
+      system cmd1
     end
 
     protected def fork_run_browser(cmd : String, url : String)

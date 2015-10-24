@@ -25,22 +25,22 @@ module IBuild::Projects
     end
 
     def compile
-      sh "cargo build"
+      sh_with_argv "cargo build"
     end
 
     # @Override
     def run
-      sh "cargo run"
+      sh_with_argv "cargo run"
     end
 
     # @Override
     def test
-      sh "cargo test"
+      sh_with_argv "cargo test"
     end
 
     # @Override
     def repl
-      super
+      sh_with_argv "rusti"
     end
 
     # @Override
