@@ -64,7 +64,7 @@ module IBuild::Projects
     end
 
     def deps_outdated
-      super
+      sh_with_argv "cargo outdated"
     end
 
     def deps_update
