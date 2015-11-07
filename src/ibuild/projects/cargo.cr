@@ -51,7 +51,7 @@ module IBuild::Projects
     def format
       # @see https://github.com/pwoolcoc/cargo-fmt
       # @see https://github.com/pwoolcoc/cargo-do
-      sh "cargo do fmt"
+      sh "cargo fmt"
     end
 
     def clean
@@ -60,7 +60,7 @@ module IBuild::Projects
 
     def deps_tree
       # @see https://github.com/killercup/cargo-edit
-      sh "cargo do list --tree"
+      sh "cargo list --tree"
     end
 
     def deps_outdated
