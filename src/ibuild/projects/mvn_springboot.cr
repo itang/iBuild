@@ -10,7 +10,7 @@ module IBuild::Projects
     # @Override
     def run
       fork_run_browser(
-        %(mvn clean spring-boot:run -Drun.jvmArguments="-Xmx1g -noverify -Drun.mode=dev" -P dev),
+        %(mvn clean spring-boot:run -Drun.jvmArguments="-Xmx1g -noverify -Drun.mode=dev" -P mock_server),
         "http://localhost:#{port}"
       )
     end
