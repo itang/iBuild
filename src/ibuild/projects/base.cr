@@ -32,7 +32,7 @@ module IBuild::Projects
       {% end %}
     end
 
-    define_dummy_methods compile, build, run, start, test, repl, format, clean, deps_tree, deps_outdated, deps_update
+    define_dummy_methods compile, build, install, run, start, test, repl, format, clean, deps_tree, deps_outdated, deps_update
 
     def git_commit_all
       # puts "Confirm(Y?): "

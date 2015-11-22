@@ -49,6 +49,10 @@ module IBuild::Projects
       sh "mvn compile"
     end
 
+    def install
+      sh "mvn clean install"
+    end
+
     # @Override
     def to_s(io)
       io << "Maven"

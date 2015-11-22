@@ -72,6 +72,10 @@ module IBuild::Projects
       sh "cargo update"
     end
 
+    def install
+      sh "cargo install --path ."
+    end
+
     # @Override
     def to_s(io)
       io << "Rust Cargo"
