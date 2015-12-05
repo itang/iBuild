@@ -17,6 +17,7 @@ module IBuild
     when Mvn.detect(dir)        then Mvn.new
     when Shards.detect(dir)     then Shards.new
     when Cargo.detect(dir)      then Cargo.new
+    when Swift.detect(dir)      then Swift.new
     end
   end
 
