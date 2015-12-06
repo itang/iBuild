@@ -2,8 +2,8 @@
 # Rust cargo Project.
 # #
 module IBuild::Projects
-  class Cargo < Project
-    BUILD_FILE = "Cargo.toml"
+  class Swift < Project
+    BUILD_FILE = "Package.swift"
 
     def self.detect(dir)
       pclj = dir + "/#{BUILD_FILE}"
@@ -11,17 +11,8 @@ module IBuild::Projects
     end
 
     def info : ProjectInfo
-      lines = File.read(BUILD_FILE).lines
-      ProjectInfo.new str_value("name", lines), str_value("version", lines)
-    end
-
-    private def str_value(key, lines)
-      line = lines.find { |x| x.starts_with?(key) }
-      if line
-        line = line.strip
-        start = line.index("\"")
-        line[(start + 1)..-2] if start
-      end
+      # TODO
+      ProjectInfo.new "", ""
     end
 
     def compile
@@ -29,56 +20,46 @@ module IBuild::Projects
     end
 
     def build
-      sh_with_argv "cargo build"
+      sh_with_argv "swift build"
     end
 
-    # @Override
     def run
-      sh_with_argv "cargo run"
-    end
-
-    # @Override
-    def test
-      sh_with_argv "cargo test"
+      super
     end
 
     # @Override
     def repl
-      sh_with_argv "rusti"
+      sh_with_argv "swift"
     end
 
     # @Override
     def format
-      # @see https://github.com/pwoolcoc/cargo-fmt
-      # @see https://github.com/pwoolcoc/cargo-do
-      sh "cargo fmt"
+      super
     end
 
     def clean
-      sh "cargo clean"
+      sh "swift build --clean"
     end
 
     def deps_tree
-      # @see https://github.com/killercup/cargo-edit
-      sh "cargo list --tree"
+      super
     end
 
     def deps_outdated
-      # @see https://github.com/kbknapp/cargo-outdated
-      sh_with_argv "cargo outdated"
+      super
     end
 
     def deps_update
-      sh "cargo update"
+      super
     end
 
     def install
-      sh "cargo install --path ."
+      super
     end
 
     # @Override
     def to_s(io)
-      io << "Rust Cargo"
+      io << "Swift build"
     end
   end
 end
